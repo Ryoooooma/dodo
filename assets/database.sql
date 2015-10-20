@@ -8,6 +8,9 @@ create table users (
 	user_name varchar(255) not null,
 	email varchar(255) not null,
 	password varchar(255) not null,
+	picture varchar(255),
+	ocupation varchar(255),
+	introduction varchar(255),
 	created datetime,
 	modified datetime
 );

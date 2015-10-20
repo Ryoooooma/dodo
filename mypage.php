@@ -5,7 +5,48 @@ session_start();
 require_once('assets/config.php');
 require_once('assets/functions.php');
 
+$images = array();
+
+$imageDir = opendir(IMAGES_DIR);
+
+while ($file = readdir($imageDir)) {
+	if ($file == '.' || $file == '..') {
+		continue;
+	}
+	
+	if (file_exists(THUMBNAIL_DIR.'/'.$file)) {
+		$images[] = 'thumbnails/'.$file;
+	} else {
+		$images[] = 'images/'.$file;
+	}
+}
+
+// ログインしてなかったら、ログインページにとばす
+if (empty($_SESSION['me'])) {
+	header('Location:' .SITE_URL.'login.php');
+}
+
 $me = $_SESSION['me'];
+$id = $me['id'];
+
+$dbh = connectDb();
+$sql = "select * from users where id = $id limit 1";
+$stmt = $dbh->query($sql);
+$user = $stmt->fetch();
+// var_dump($row);
+
+
+if ($user['user_name'] == '') {
+	$user['user_name'] = 'EMPTY';
+}
+
+if ($user['ocupation'] == '') {
+	$user['ocupation'] = 'EMPTY';
+}
+
+if ($user['introduction'] == '') {
+	$user['introduction'] = 'EMPTY';
+}
 
 ?>
 
@@ -25,16 +66,21 @@ $me = $_SESSION['me'];
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 	<body id="top">
-
 		<!-- Header -->
 			<header id="header">
-				<a href="#" class="image avatar" style="float:left;"><img src="assets/images/ryoma.jpg" alt="" /></a>
+				<p><a href="#" class="image avatar" style="float:left;"><img src="<?php echo $user['image']; ?>" alt="" /></a></p>
+				<p>
+					<form action="upload.php" method="POST" enctype="multipart/form-data">
+						<p><input type="file" name="image"></p>
+						<p><input type="submit" value="UP LOAD"></p>
+					</form>
+				</p>
 				<div>
-					<h2 style="float:left;"><?php echo $me['user_name']; ?></h2>
-					<h3 style="float:left;">　　 Software Engneer</h3>
+					<h2 ><?php echo $user['user_name']; ?></h2>
+					<h3 ><?php echo $user['ocupation']; ?></h3>
 				</div>
 				<div style="clear:both;">
-					<p>text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text</p>
+					<p><?php echo $user['introduction']; ?></p>
 					<ul class="actions">
 						<li><a href="#" class="button">Learn More</a></li>
 					</ul>

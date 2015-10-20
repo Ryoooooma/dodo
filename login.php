@@ -6,7 +6,7 @@ require_once('assets/config.php');
 require_once('assets/functions.php');
 
 if (!empty($_SESSION['me'])) {
-	header('Location:'.SITE_URL.'/mypage.php');
+	header('Location:'.SITE_URL.'mypage.php');
 }
 
 function getUser($user_name, $password, $dbh) {
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 		// セッションハイジャック対策...これやると一旦動かないから置いておく。
 		// session_regenerate_id(true);
 		$_SESSION['me'] = $me;
-			header('Location:'.SITE_URL.'/mypage.php');
+			header('Location:'.SITE_URL.'mypage.php');
 		exit;
 	}
 
@@ -70,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] != "POST") {
 		time()+60*60*24*14);
 	}
 }
+
+	
 
 ?>
 

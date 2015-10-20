@@ -14,4 +14,7 @@ define('DB_PASSWORD', 'root');
 define('SITE_URL', 'http://192.168.33.10/dodo/');
 define('PASSEWORD_KEY', 'root');
 
+define('IMAGES_DIR', dirname($_SERVER['SCRIPT_FILENAME']).'/assets/images/users');
+
 error_reporting(E_ALL & ~E_NOTICE);
+
