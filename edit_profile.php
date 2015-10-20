@@ -18,8 +18,12 @@ $sql = "select * from users where id = $id limit 1";
 $stmt = $dbh->query($sql);
 $user = $stmt->fetch();
 
-if ($_SERVER['REQUEST_METHOD'] = "POST") {
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
 
+
+
+
+} else {
     $user_name = $_POST['user_name'];
     $email = $_POST['email'];
     $ocupation = $_POST['ocupation'];
@@ -87,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] = "POST") {
                 </p>
 
                 <p class="email">
-                    <input name="ocupation" type="text" class="validate[required,custom[email]] feedback-input" id="" placeholder="Ocupation"  value="<?php echo $user['ocupation']; ?>" />
+                    <input name="ocupation" type="text" class="validate[required,custom[email]] feedback-input" id="comment" placeholder="Ocupation"  value="<?php echo $user['ocupation']; ?>" />
                 </p>
 
                 <p class="text">

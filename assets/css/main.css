@@ -2464,6 +2464,7 @@
 
 	#header {
 		background-color: #1f1815;
+		/*		background-image: url('../imagesbackground.jpg/background.jpg');*/
 		background-attachment: scroll,								fixed;
 		background-image: url("images/overlay.png"), url("../../images/bg.jpg");
 		background-position: top left,							top left;

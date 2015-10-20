@@ -69,11 +69,10 @@ if ($user['introduction'] == '') {
 		<!-- Header -->
 			<header id="header">
 				<p><a href="#" class="image avatar" style="float:left;"><img src="<?php echo $user['image']; ?>" alt="" /></a></p>
-				<p>
-					<form action="upload.php" method="POST" enctype="multipart/form-data">
-						<p><input type="file" name="image"></p>
-						<p><input type="submit" value="UP LOAD"></p>
-					</form>
+				<form action="upload.php" method="POST" enctype="multipart/form-data" style="float:right;">
+					<p><input type="file" name="image"></p>
+					<p><input type="submit" value="UP LOAD"></p>
+				</form>
 				</p>
 				<div>
 					<h2 ><?php echo $user['user_name']; ?></h2>
